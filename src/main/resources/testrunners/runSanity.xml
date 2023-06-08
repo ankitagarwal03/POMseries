@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+
+
+<suite name="open cart sanity automation" verbose="1" parallel="tests" thread-count="1">
+
+    <listeners>
+        <listener class-name ="com.qa.opencart.listeners.ExtentReportListener" />
+        <listener class-name ="com.qa.opencart.listeners.TestAllureListener" />
+    </listeners>
+
+    <test name="login Page Test">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="com.qa.opencart.tests.LoginPageTest"></class>
+        </classes>
+    </test>
+
+<!--    <test name="My Account Page Test">-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <classes>-->
+<!--            <class name="com.qa.opencart.tests.MyAccountTest"></class>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    <test name="Product Details page Page Test">-->
+<!--        <parameter name="browser" value="firefox"/>-->
+<!--        <classes>-->
+<!--            <class name="com.qa.opencart.tests.ProductDetailsPageTest"></class>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    <test name="Search Result Details page Test">-->
+<!--        <classes>-->
+<!--            <class name="com.qa.opencart.tests.SearchResultTestWithPojo"></class>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+</suite>

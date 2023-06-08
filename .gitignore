@@ -8,7 +8,8 @@ node_modules/
 dist/
 
 out/
-
+allure-results
+screenshot
 # Compiled Java class files
 *.class
 
