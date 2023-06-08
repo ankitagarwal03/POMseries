@@ -1,6 +1,5 @@
 package com.qa.opencart.factory;
 
-import com.qa.opencart.frameWorKException.FrameworkException;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -16,8 +15,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
-
-import static java.sql.DriverManager.getDriver;
 
 public class DriverFactory {
     WebDriver driver;
