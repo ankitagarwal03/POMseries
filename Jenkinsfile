@@ -27,6 +27,12 @@ pipeline{
             }
         }
 
+        stage("running Sanity"){
+             steps{
+                  echo("running sanity on the QA")
+             }
+        }
+
 
     }
 }
