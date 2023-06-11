@@ -27,9 +27,9 @@ pipeline{
             }
         }
 
-        stage("running Sanity"){
+        stage("running Regression"){
              steps{
-                  echo("running sanity on the QA")
+                  echo("running Regression on the QA")
              }
         }
 
