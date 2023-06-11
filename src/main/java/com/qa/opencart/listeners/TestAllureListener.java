@@ -1,6 +1,6 @@
 package com.qa.opencart.listeners;
 
-import com.qa.opencart.factory.DriverFactory;
+
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -8,6 +8,9 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+
+import com.qa.opencart.factory.DriverFactory;
+
 
 public class TestAllureListener implements ITestListener {
 
@@ -79,6 +82,4 @@ public class TestAllureListener implements ITestListener {
     }
 
 }
-
-
 
