@@ -3,7 +3,7 @@
 
 
 
-<suite name="open cart automation" verbose="1" parallel="tests" thread-count="2">
+<suite name="open cart automation" verbose="1" parallel="tests" thread-count="1">
 
     <listeners>
         <listener class-name ="com.qa.opencart.listeners.ExtentReportListener" />

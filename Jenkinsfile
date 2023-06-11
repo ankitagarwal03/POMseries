@@ -1,36 +1,106 @@
-pipeline{
+pipeline
+{
     agent any
 
-    stages{
+    tools{
+        maven 'maven'
+        }
 
-        stage("build the project"){
-            steps{
-                echo("Project is getting build")
+    stages
+    {
+        stage('Build')
+        {
+            steps
+            {
+                 git 'https://github.com/jglick/simple-maven-project-with-tests.git'
+                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
+            }
+            post
+            {
+                success
+                {
+                    junit '**/target/surefire-reports/TEST-*.xml'
+                    archiveArtifacts 'target/*.jar'
+                }
             }
         }
 
-        stage("deploy to QA"){
+
+
+        stage("Deploy to QA"){
             steps{
-                echo("deploying to QA")
+                echo("deploy to qa")
             }
         }
 
-        stage("deploy to Dev"){
-            steps{
-                echo("deploying to DEV")
+
+
+        stage('Regression Automation Test') {
+            steps {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    git 'https://github.com/ankitagarwal03/POMseries'
+                    sh "mvn clean test -Dsurefire.suiteXmlFiles=src/main/resources/testrunners/runSanity.xml"
+
+                }
             }
         }
 
-        stage("running Sanity"){
-            steps{
-                echo("running sanity on the QA")
+
+        stage('Publish Allure Reports') {
+           steps {
+                script {
+                    allure([
+                        includeProperties: false,
+                        jdk: '',
+                        properties: [],
+                        reportBuildPolicy: 'ALWAYS',
+                        results: [[path: '/allure-results']]
+                    ])
+                }
             }
         }
 
-        stage("running Regression"){
-             steps{
-                  echo("running Regression on the QA")
-             }
+
+        stage('Publish Extent Report'){
+            steps{
+                     publishHTML([allowMissing: false,
+                                  alwaysLinkToLastBuild: false,
+                                  keepAll: true,
+                                  reportDir: 'reports',
+                                  reportFiles: 'TestExecutionReport.html',
+                                  reportName: 'HTML Regression Extent Report',
+                                  reportTitles: ''])
+            }
+        }
+
+        stage("Deploy to Stage"){
+            steps{
+                echo("deploy to Stage")
+            }
+        }
+
+        stage('Sanity Automation Test') {
+            steps {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    git 'https://github.com/ankitagarwal03/POMseries'
+                    sh "mvn clean test -Dsurefire.suiteXmlFiles=src/main/resources/testrunners/runAllTest.xml"
+
+                }
+            }
+        }
+
+
+
+        stage('Publish sanity Extent Report'){
+            steps{
+                     publishHTML([allowMissing: false,
+                                  alwaysLinkToLastBuild: false,
+                                  keepAll: true,
+                                  reportDir: 'reports',
+                                  reportFiles: 'TestExecutionReport.html',
+                                  reportName: 'HTML Sanity Extent Report',
+                                  reportTitles: ''])
+            }
         }
 
 
