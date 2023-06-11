@@ -24,8 +24,8 @@ public class DriverFactory {
         return tlDriver.get();
     }
     public WebDriver initDriver(Properties prop){
-//        String browser = prop.getProperty("browser");
-        String browser = System.getProperty("browser");
+        String browser = prop.getProperty("browser");
+//        String browser = System.getProperty("browser");
         browserOptions = new BrowserOptions(prop);
 
         switch (browser.toLowerCase().trim()){
