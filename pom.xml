@@ -4,47 +4,53 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.example</groupId>
+    <groupId>frameworkPractice</groupId>
     <artifactId>frameworkPractice</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <extentreports-version>5.0.8</extentreports-version>
+        <selenium-java>4.9.0</selenium-java>
         <aspectj.version>1.9.19</aspectj.version>
         <allure.version>2.22.1</allure.version>
+
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.9.0</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>2.4</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi</artifactId>
-            <version>5.0.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.aventstack</groupId>
-            <artifactId>extentreports</artifactId>
-            <version>5.0.9</version>
+            <version>${selenium-java}</version>
         </dependency>
 
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>6.14.3</version>
-            <scope>provided</scope>
-            <optional>true</optional>
+            <version>7.0.0</version>
         </dependency>
+
+
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>5.2.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>5.2.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.aventstack</groupId>
+            <artifactId>extentreports</artifactId>
+            <version>${extentreports-version}</version>
+        </dependency>
+
 
         <dependency>
             <groupId>io.qameta.allure</groupId>
@@ -58,7 +64,11 @@
             <version>${aspectj.version}</version>
         </dependency>
 
+
+
+
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -81,14 +91,14 @@
                     <forkCount>3</forkCount>
                     <reuseForks>true</reuseForks>
                     <suiteXmlFiles>
-<!--                        <suiteXmlFile>src/main/resources/testrunners/runSanity.xml</suiteXmlFile>-->
-                        <!--suppress UnresolvedMavenProperty -->
+                        <!-- <suiteXmlFile>src/main/resources/testrunners/testng_regression.xml</suiteXmlFile> -->
                         <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
                     </suiteXmlFiles>
 
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
+
 
                 </configuration>
                 <dependencies>
@@ -103,5 +113,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
