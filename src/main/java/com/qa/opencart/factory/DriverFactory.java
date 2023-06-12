@@ -1,5 +1,6 @@
 package com.qa.opencart.factory;
 
+import com.qa.opencart.frameWorKException.FrameworkException;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -23,38 +24,45 @@ public class DriverFactory {
     public synchronized static WebDriver getDriver() {
         return tlDriver.get();
     }
-    public WebDriver initDriver(Properties prop){
-        String browser = prop.getProperty("browser");
-//        String browser = System.getProperty("browser");
+    public WebDriver initDriver(Properties prop) {
+        String browserName = prop.getProperty("browser").trim();
+
+        // String browserName = System.getProperty("browser");
+
+        System.out.println("browser name is : " + browserName);
+
+//        highlightElement = prop.getProperty("highlight");
+
         browserOptions = new BrowserOptions(prop);
 
-        switch (browser.toLowerCase().trim()){
+        switch (browserName.toLowerCase()) {
             case "chrome":
-                ChromeOptions co = browserOptions.getChromeOptions();
-//                driver = new ChromeDriver(co);
-                tlDriver.set(new ChromeDriver(co));
-
-                break;
-            case "firefox":
-//                driver = new FirefoxDriver();
-                tlDriver.set(new FirefoxDriver());
-
+                // driver = new ChromeDriver(optionsManager.getChromeOptions());
+                tlDriver.set(new ChromeDriver(browserOptions.getChromeOptions()));
                 break;
             case "edge":
-//                driver = new EdgeDriver();
-                tlDriver.set(new EdgeDriver());
+                // driver = new EdgeDriver(optionsManager.getEdgeOptions());
+                tlDriver.set(new EdgeDriver(browserOptions.getEdgeOptions()));
                 break;
             case "safari":
-//                driver = new SafariDriver();
+                // driver = new SafariDriver();
                 tlDriver.set(new SafariDriver());
                 break;
+            case "firefox":
+                // driver = new FirefoxDriver(optionsManager.getFirefoxOptions());
+                tlDriver.set(new FirefoxDriver(browserOptions.getFirefoxOptions()));
+                break;
+
             default:
-                System.out.println("No Browser Found");
+                System.out.println("plz pass the right browser ...." + browserName);
+                throw new FrameworkException("NOBROWSERFOUNDEXCEPTION");
         }
-        if (driver != null) {
-            driver.manage().window().maximize();
-        }
+
+        getDriver().manage().deleteAllCookies();
+        getDriver().manage().window().maximize();
+        getDriver().get(prop.getProperty("url"));
         return getDriver();
+
     }
 
 
