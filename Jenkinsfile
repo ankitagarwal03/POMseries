@@ -8,22 +8,22 @@ pipeline
 
     stages
     {
-        stage('Build')
-        {
-            steps
-            {
-                 git 'https://github.com/jglick/simple-maven-project-with-tests.git'
-                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
-            }
-            post
-            {
-                success
-                {
-                    junit '**/target/surefire-reports/TEST-*.xml'
-                    archiveArtifacts 'target/*.jar'
-                }
-            }
-        }
+//         stage('Build')
+//         {
+//             steps
+//             {
+//                  git 'https://github.com/jglick/simple-maven-project-with-tests.git'
+//                  sh "mvn -Dmaven.test.failure.ignore=true clean package"
+//             }
+//             post
+//             {
+//                 success
+//                 {
+//                     junit '**/target/surefire-reports/TEST-*.xml'
+//                     archiveArtifacts 'target/*.jar'
+//                 }
+//             }
+//         }
 
 
 
@@ -39,7 +39,7 @@ pipeline
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     git 'https://github.com/ankitagarwal03/POMseries.git'
-                    sh "mvn clean install"
+                    sh "mvn clean test -Denv=dev"
 
                 }
             }
