@@ -39,7 +39,7 @@ pipeline
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     git 'https://github.com/ankitagarwal03/POMseries.git'
-                    sh "mvn clean test"
+                    sh "mvn clean install"
 
                 }
             }
