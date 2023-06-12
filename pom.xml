@@ -8,6 +8,9 @@
     <artifactId>frameworkPractice</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <name>Jan2023POMSeries</name>
+    <url>http://www.opencart.com</url>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -91,7 +94,7 @@
                     <forkCount>3</forkCount>
                     <reuseForks>true</reuseForks>
                     <suiteXmlFiles>
-                <!-- <suiteXmlFile>src/main/resources/testrunners/runSanity.xml</suiteXmlFile>-->
+<!--                 <suiteXmlFile>src/main/resources/testrunners/runSanity.xml</suiteXmlFile>-->
                         <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
                     </suiteXmlFiles>
 
