@@ -39,7 +39,7 @@ pipeline
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     git 'https://github.com/ankitagarwal03/POMseries.git'
-                    sh "mvn clean test -Denv=dev"
+                    sh "mvn clean test -Dsurefire.suiteXmlFiles=src/main/resources/testrunners/runSanity.xml"
 
                 }
             }
