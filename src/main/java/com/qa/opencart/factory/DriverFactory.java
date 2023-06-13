@@ -75,22 +75,24 @@ public class DriverFactory {
         try {
             if(envName == null) {
                 System.out.println("inside the null so picking default");
-                ip = new FileInputStream("./src/main/config/config.properties");
+
+                ip = new FileInputStream("./src/main/resources/config/config.properties");
 
             }
             else{
                 switch (envName.toLowerCase().trim()){
                     case "qa":
                         System.out.println("inside the qa");
-                        ip = new FileInputStream("./src/main/config/qa_config.properties");
+                        ip = new FileInputStream("./src/main/resources/config/qa_config.properties");
                         break;
                     case "dev":
                         System.out.println("inside the dev");
-                        ip = new FileInputStream("./src/main/config/dev_config.properties");
+                        ip = new FileInputStream("./src/main/resources/config/dev_config.properties");
                         break;
                     case "prod":
+
                         System.out.println("inside the prod");
-                        ip = new FileInputStream("./src/main/config/prod_config.properties");
+                        ip = new FileInputStream(".src/main/resources/config/prod_config.properties");
                         break;
                     default:
                         System.out.println("not found any file");
