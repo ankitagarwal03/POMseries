@@ -79,29 +79,29 @@ pipeline
             }
         }
 
-//         stage('Sanity Automation Test') {
-//             steps {
-//                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-//                     git 'https://github.com/ankitagarwal03/POMseries.git'
-//                     sh "mvn clean test"
-//
-//                 }
-//             }
-//         }
-//
-//
-//
-//         stage('Publish sanity Extent Report'){
-//             steps{
-//                      publishHTML([allowMissing: false,
-//                                   alwaysLinkToLastBuild: false,
-//                                   keepAll: true,
-//                                   reportDir: 'reports',
-//                                   reportFiles: 'TestExecutionReport.html',
-//                                   reportName: 'HTML Sanity Extent Report',
-//                                   reportTitles: ''])
-//             }
-//         }
+        stage('Sanity Automation Test') {
+            steps {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    git 'https://github.com/ankitagarwal03/POMseries.git'
+                    sh "mvn clean test -Dsurefire.suiteXmlFiles=src/main/resources/testrunners/runAllTest.xml"
+
+                }
+            }
+        }
+
+
+
+        stage('Publish sanity Extent Report'){
+            steps{
+                     publishHTML([allowMissing: false,
+                                  alwaysLinkToLastBuild: false,
+                                  keepAll: true,
+                                  reportDir: 'reports',
+                                  reportFiles: 'TestExecutionReport.html',
+                                  reportName: 'HTML Sanity Extent Report',
+                                  reportTitles: ''])
+            }
+        }
 
 
     }
